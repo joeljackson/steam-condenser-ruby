@@ -4,8 +4,8 @@
 # Copyright (c) 2008-2012, Sebastian Staudt
 
 require 'core_ext/stringio'
-require 'errors/timeout_error'
 require 'steam/sockets/steam_socket'
+require 'steam-condenser/error/timeout'
 
 module SteamCondenser
 
@@ -51,7 +51,7 @@ module SteamCondenser
           if split_packets.size < packet_count
             begin
               bytes_read = receive_packet
-            rescue SteamCondenser::TimeoutError
+            rescue Error::Timeout
               bytes_read = 0
             end
           else
