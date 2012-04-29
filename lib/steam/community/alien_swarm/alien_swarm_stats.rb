@@ -1,15 +1,16 @@
 # This code is free software; you can redistribute it and/or modify it under
 # the terms of the new BSD License.
 #
-# Copyright (c) 2010-2011, Sebastian Staudt
+# Copyright (c) 2010-2012, Sebastian Staudt
 
 require 'steam/community/alien_swarm/alien_swarm_mission'
 require 'steam/community/alien_swarm/alien_swarm_weapon'
 
-# This class represents the game statistics for a single user in Alien Swarm
-#
-# @author Sebastian Staudt
 module SteamCondenser
+
+  # This class represents the game statistics for a single user in Alien Swarm
+  #
+  # @author Sebastian Staudt
   class AlienSwarmStats < GameStats
 
     # Returns general stats for the players
@@ -148,7 +149,8 @@ module SteamCondenser
     #
     # If the mission stats haven't been parsed already, parsing is done now.
     #
-    # @return [Hash<String, AlienSwarmMission>] The mission stats for this player
+    # @return [Hash<String, AlienSwarmMission>] The mission stats for this
+    #         player
     def mission_stats
       return unless public?
 

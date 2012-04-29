@@ -1,12 +1,13 @@
 # This code is free software; you can redistribute it and/or modify it under
 # the terms of the new BSD License.
 #
-# Copyright (c) 2010-2011, Sebastian Staudt
+# Copyright (c) 2010-2012, Sebastian Staudt
 
-# Represents the stats for a Counter-Strike: Source map for a specific user
-#
-# @author Sebastian Staudt
 module SteamCondenser
+
+  # Represents the stats for a Counter-Strike: Source map for a specific user
+  #
+  # @author Sebastian Staudt
   class CSSMap
 
     # Returns the name of this map

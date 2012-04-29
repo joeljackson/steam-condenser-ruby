@@ -1,17 +1,18 @@
 # This code is free software; you can redistribute it and/or modify it under
 # the terms of the new BSD License.
 #
-# Copyright (c) 2008-2011, Sebastian Staudt
+# Copyright (c) 2008-2012, Sebastian Staudt
 
 require 'core_ext/stringio'
 require 'errors/timeout_error'
 require 'steam/sockets/steam_socket'
 
-# This class represents a socket used to communicate with game servers based on
-# the Source engine (e.g. Team Fortress 2, Counter-Strike: Source)
-#
-# @author Sebastian Staudt
 module SteamCondenser
+
+  # This class represents a socket used to communicate with game servers based
+  # on the Source engine (e.g. Team Fortress 2, Counter-Strike: Source)
+  #
+  # @author Sebastian Staudt
   class SourceSocket
 
     include SteamSocket
