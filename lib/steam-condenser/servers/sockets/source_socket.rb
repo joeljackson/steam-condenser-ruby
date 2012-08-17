@@ -4,10 +4,10 @@
 # Copyright (c) 2008-2012, Sebastian Staudt
 
 require 'core_ext/stringio'
-require 'steam/sockets/steam_socket'
 require 'steam-condenser/error/timeout'
+require 'steam-condenser/servers/sockets/base_socket'
 
-module SteamCondenser
+module SteamCondenser::Servers::Sockets
 
   # This class represents a socket used to communicate with game servers based
   # on the Source engine (e.g. Team Fortress 2, Counter-Strike: Source)
@@ -15,7 +15,7 @@ module SteamCondenser
   # @author Sebastian Staudt
   class SourceSocket
 
-    include SteamSocket
+    include BaseSocket
 
     # Reads a packet from the socket
     #
@@ -51,7 +51,7 @@ module SteamCondenser
           if split_packets.size < packet_count
             begin
               bytes_read = receive_packet
-            rescue Error::Timeout
+            rescue SteamCondenser::Error::Timeout
               bytes_read = 0
             end
           else
@@ -60,12 +60,12 @@ module SteamCondenser
         end while bytes_read > 0 && @buffer.long == 0xFFFFFFFE
 
         if is_compressed
-          packet = SteamPacketFactory.reassemble_packet(split_packets, true, packet_checksum)
+          packet = SteamCondenser::SteamPacketFactory.reassemble_packet(split_packets, true, packet_checksum)
         else
-          packet = SteamPacketFactory.reassemble_packet(split_packets)
+          packet = SteamCondenser::SteamPacketFactory.reassemble_packet(split_packets)
         end
       else
-        packet = SteamPacketFactory.packet_from_data(@buffer.get)
+        packet = SteamCondenser::SteamPacketFactory.packet_from_data(@buffer.get)
       end
 
       if is_compressed
