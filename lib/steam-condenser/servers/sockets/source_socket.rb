@@ -1,7 +1,7 @@
 # This code is free software; you can redistribute it and/or modify it under
 # the terms of the new BSD License.
 #
-# Copyright (c) 2008-2012, Sebastian Staudt
+# Copyright (c) 2008-2013, Sebastian Staudt
 
 require 'core_ext/stringio'
 require 'steam-condenser/error/timeout'
@@ -24,7 +24,7 @@ module SteamCondenser::Servers::Sockets
     # reassembles split packets into single packet objects. Additionally Source
     # may compress big packets using bzip2. Those packets will be compressed.
     #
-    # @return [SteamPacket] The packet replied from the server
+    # @return [BasePacket] The packet replied from the server
     def reply
       receive_packet 1400
       is_compressed = false
@@ -60,12 +60,12 @@ module SteamCondenser::Servers::Sockets
         end while bytes_read > 0 && @buffer.long == 0xFFFFFFFE
 
         if is_compressed
-          packet = SteamCondenser::Servers::Packets::SteamPacketFactory.reassemble_packet(split_packets, true, packet_checksum)
+          packet = Servers::Packets::SteamPacketFactory.reassemble_packet(split_packets, true, packet_checksum)
         else
-          packet = SteamCondenser::Servers::Packets::SteamPacketFactory.reassemble_packet(split_packets)
+          packet = Servers::Packets::SteamPacketFactory.reassemble_packet(split_packets)
         end
       else
-        packet = SteamCondenser::Servers::Packets::SteamPacketFactory.packet_from_data(@buffer.get)
+        packet = Servers::Packets::SteamPacketFactory.packet_from_data(@buffer.get)
       end
 
       if is_compressed
